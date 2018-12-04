@@ -66,13 +66,13 @@ public class mainLogin extends javax.swing.JFrame {
             .addGap(0, 575, Short.MAX_VALUE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(41, 61, 85));
+        jPanel2.setBackground(new java.awt.Color(15, 36, 63));
         jPanel2.setLayout(null);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/smart1 -copy.JPG"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/smart1.JPG"))); // NOI18N
         jLabel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(-10, -20, 1420, 250);
+        jLabel4.setBounds(-10, -20, 1420, 220);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -126,7 +126,7 @@ public class mainLogin extends javax.swing.JFrame {
         jPanel9.add(btnSignUp);
         btnSignUp.setBounds(1040, 250, 75, 23);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/Butterfly-Desktop-Background-HD-Full-Screen-Wallpapers.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/Butterfly-MYLAPTOP.jpg"))); // NOI18N
         jPanel9.add(jLabel6);
         jLabel6.setBounds(0, -40, 1350, 440);
 
@@ -163,11 +163,14 @@ public class mainLogin extends javax.swing.JFrame {
             if (user.getUsername() != null) {
                 loggedInUserId = user.getId();
                 if (user.getUserType().equalsIgnoreCase("Admin")) {
-                    loggedIn = "Hello " + user.getFirstName() + " " + user.getLastName() + " You are loggedIn as admin";
+                    //loggedIn = "Hello " + user.getFirstName() + " " + user.getLastName() + " You are loggedIn as admin";
+                    loggedIn = user.getFirstName() + " You admin";
                     this.setVisible(false);
                     new DashBoard().setVisible(true);
                 } else {
-                    loggedIn = "Hello " + user.getFirstName() + " " + user.getLastName() + " You are loggedIn as Salesman";
+                    //loggedIn = "Hello " + user.getFirstName() + " " + user.getLastName() + " You are loggedIn as Salesman";
+                    loggedIn = user.getFirstName() + " You Salesman";
+                    
                     this.setVisible(false);
                     new UserDashBoard().setVisible(true);
                 }
