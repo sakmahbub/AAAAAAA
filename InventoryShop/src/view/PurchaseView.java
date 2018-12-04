@@ -33,7 +33,7 @@ public class PurchaseView extends javax.swing.JFrame {
         displaySummaryIntoTable();
         displayPurchaseIntoTable();
         MenuFormAdmin.commonMenuForAdmin(this);
-         txtLoginMsg.setText(Login.loggedIn);
+         txtLoginMsg.setText(mainLogin.loggedIn);
     }
     private DefaultComboBoxModel comboBoxModel = null;
     
@@ -444,7 +444,7 @@ public class PurchaseView extends javax.swing.JFrame {
         ProductCategory pc = new ProductCategory();
         pc.setId(Integer.parseInt(splited[0]));
         User user = new User();
-        user.setId(Login.loggedInUserId);
+        user.setId(mainLogin.loggedInUserId);
         
         Purchase p = new Purchase(txtPName.getText(), txtPCode.getText(), Integer.parseInt(txtQty.getText()), Double.parseDouble(txtUnitPrice.getText()), Double.parseDouble(txtTotalPrice.getText()), new Date(), pc, user);
         PurchaseService.insertMain(p);

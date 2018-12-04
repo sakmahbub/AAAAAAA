@@ -24,7 +24,7 @@ public class SalesView extends javax.swing.JFrame {
         displaySalesIntoTable();
         txtProductId.setVisible(false);
         MenuFormAdmin.commonMenuForAdmin(this);
-        txtLoginMsg.setText(Login.loggedIn);
+        txtLoginMsg.setText(mainLogin.loggedIn);
 
     }
 
@@ -447,7 +447,7 @@ public class SalesView extends javax.swing.JFrame {
         purchase.setId(Integer.parseInt(txtProductId.getText().trim()));
         sales.setPurchase(purchase);
         User user=new User();
-        user.setId(Login.loggedInUserId);
+        user.setId(mainLogin.loggedInUserId);
         sales.setUser(user);
         SalesService.insertForSales(sales);
         clearForm();

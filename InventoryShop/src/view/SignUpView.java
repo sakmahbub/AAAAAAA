@@ -13,7 +13,7 @@ public class SignUpView extends javax.swing.JFrame {
         initComponents();
         MenuFormAdmin.commonMenuForAdmin(this);
         displayUserListIntoTable();
-         txtLoginMsg.setText(Login.loggedIn);
+         txtLoginMsg.setText(mainLogin.loggedIn);
     }
 
     public void displayUserListIntoTable() {

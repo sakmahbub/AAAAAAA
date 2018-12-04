@@ -33,7 +33,7 @@ public class SalesReportView extends javax.swing.JFrame {
         displayTodaysSalesIntoTable();
         displaySalesByDateRangeIntoTable();
         MenuFormAdmin.commonMenuForAdmin(this);
-        txtLoginMsg.setText(Login.loggedIn);
+        txtLoginMsg.setText(mainLogin.loggedIn);
         // Auto display Today's Date as End Date
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

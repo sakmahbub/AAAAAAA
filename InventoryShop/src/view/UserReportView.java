@@ -29,7 +29,7 @@ public class UserReportView extends javax.swing.JFrame {
         displayUserByUserTypeIntoTable();
         displayUserByUserTypeAndStatusIntoTable();
         MenuFormAdmin.commonMenuForAdmin(this);
-        txtLoginMsg.setText(Login.loggedIn);
+        txtLoginMsg.setText(mainLogin.loggedIn);
     }
     private DefaultComboBoxModel comboBoxModel = null;
 

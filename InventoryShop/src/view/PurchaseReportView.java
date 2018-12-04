@@ -33,7 +33,7 @@ public class PurchaseReportView extends javax.swing.JFrame {
         displayPurchaseByCategoryIntoTable();
         displayPurchaseByDateRangeIntoTable();
         MenuFormAdmin.commonMenuForAdmin(this);
-        txtLoginMsg.setText(Login.loggedIn);
+        txtLoginMsg.setText(mainLogin.loggedIn);
       
         // Auto display Today's Date as End Date
         Date date = Calendar.getInstance().getTime();

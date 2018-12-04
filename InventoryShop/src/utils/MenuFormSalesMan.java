@@ -1,7 +1,7 @@
 package utils;
 
 import view.DashBoard;
-import view.Login;
+import view.mainLogin;
 import view.SalesView;
 import view.SalesViewForSalesMan;
 import view.UserDashBoard;
@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import view.mainLogin;
 
 public class MenuFormSalesMan {
 
@@ -49,7 +50,7 @@ public class MenuFormSalesMan {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new Login().setVisible(true);
+                new mainLogin().setVisible(true);
             }
         });
         file.add(dashboard);

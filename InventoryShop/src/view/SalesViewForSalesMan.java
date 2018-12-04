@@ -29,7 +29,7 @@ public class SalesViewForSalesMan extends javax.swing.JFrame {
 
         txtProductId.setVisible(false);
         MenuFormSalesMan.commonMenuForSalesMan(this);
-        txtLoginMsg.setText(Login.loggedIn);
+        txtLoginMsg.setText(mainLogin.loggedIn);
     }
 
     public void clearForm() {
@@ -63,7 +63,7 @@ public class SalesViewForSalesMan extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblSales.getModel();
         model.setRowCount(0);
         Object[] row = new Object[7];
-        List<Sales> list = ReportService.getSalesByUser(Login.loggedInUserId);
+        List<Sales> list = ReportService.getSalesByUser(mainLogin.loggedInUserId);
         for (int i = 0; i < list.size(); i++) {
             row[0] = list.get(i).getProductName();
             row[1] = list.get(i).getProductCode();
@@ -499,7 +499,7 @@ public class SalesViewForSalesMan extends javax.swing.JFrame {
         purchase.setId(Integer.parseInt(txtProductId.getText().trim()));
         sales.setPurchase(purchase);
         User user = new User();
-        user.setId(Login.loggedInUserId);
+        user.setId(mainLogin.loggedInUserId);
         sales.setUser(user);
         SalesService.insertForSales(sales);
         clearForm();
@@ -516,7 +516,7 @@ public class SalesViewForSalesMan extends javax.swing.JFrame {
         try {
             Date sdate = new SimpleDateFormat("yyyy-MM-dd").parse(txtStartDate.getText().trim());
             Date edate = new SimpleDateFormat("yyyy-MM-dd").parse(txtEndDate.getText().trim());
-            List<Sales> list = ReportService.getSalesByUserAndDateRange(Login.loggedInUserId, sdate, edate);
+            List<Sales> list = ReportService.getSalesByUserAndDateRange(mainLogin.loggedInUserId, sdate, edate);
             for (int i = 0; i < list.size(); i++) {
                 row[0] = list.get(i).getProductName();
                 row[1] = list.get(i).getProductCode();

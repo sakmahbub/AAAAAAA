@@ -1,7 +1,7 @@
 package utils;
 
 import view.DashBoard;
-import view.Login;
+import view.mainLogin;
 import view.PurchaseReportView;
 import view.PurchaseView;
 import view.SalesReportView;
@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import view.mainLogin;
 
 public class MenuFormAdmin {
 
@@ -73,7 +74,7 @@ public class MenuFormAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new Login().setVisible(true);
+                new mainLogin().setVisible(true);
             }
         });
         file.add(dashboard);
