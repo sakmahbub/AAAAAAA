@@ -76,7 +76,7 @@ public class PurchaseService {
     
     public static List<Purchase> getPurchaseTable(){
         List<Purchase> list = new ArrayList<>();
-        String sql = "select id, name, price, date from purchase";
+        String sql = "select * from purchase";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

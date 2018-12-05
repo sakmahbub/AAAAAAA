@@ -86,7 +86,7 @@ public class SalesService {
     
     public static List<Sales> getSalesTable() {
         List<Sales> list = new ArrayList<>();
-        String sql = "select id, name, price, date, pid from sales";
+        String sql = "select * from sales";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
