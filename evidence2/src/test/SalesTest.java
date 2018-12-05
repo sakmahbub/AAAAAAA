@@ -17,10 +17,10 @@ import service.SalesService;
 public class SalesTest {
     
     public static void main(String[] args) {
-        //SalesService.createTable();
-        Purchase p = new Purchase();
-        p.setId(1);
-        Sales s = new Sales("htc mobile", 16000, new Date(), p);
-        SalesService.insert(s);
+        SalesService.createTable();
+//        Purchase p = new Purchase();
+//        p.setId(1);
+//        Sales s = new Sales("htc mobile", 16000, new Date(), p);
+//        SalesService.insert(s);
     }
 }

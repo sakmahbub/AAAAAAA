@@ -14,15 +14,18 @@ import service.PurchaseService;
  * @author User
  */
 public class PurchaseTest {
-
+    
     public static void main(String[] args) {
         //PurchaseService.createTable();
-//        Purchase p = new Purchase("htc mobile", 15000, new Date());
+//        Purchase p = new Purchase("Walton mobile", 5000, new Date());
 //        PurchaseService.insert(p);
 //        Purchase p = new Purchase();
 //        p.setName("htc 626");
 //        p.setPrice(14000);
 //        p.setId(1);
 //        PurchaseService.update(p);
+
+        Purchase p = new Purchase(1, "Walton", 20000, new Date());
+        PurchaseService.update(p);
     }
 }

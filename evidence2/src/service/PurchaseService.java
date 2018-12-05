@@ -79,7 +79,7 @@ public class PurchaseService {
         }
     }
 
-    public static List<Purchase> getPurchaseTable() {
+    public static List<Purchase> getPurchaseList() {
         List<Purchase> list = new ArrayList<>();
         String sql = "select * from purchase";
         try {
@@ -101,7 +101,7 @@ public class PurchaseService {
         return list;
     }
 
-    public static Purchase getPurchaseByProductCode(String purchaseId) {
+    public static Purchase getPurchaseByProductId(String purchaseId) {
         Purchase p = new Purchase();
         String sql = "select * from purchase where id=?";
         try {
@@ -129,4 +129,6 @@ public class PurchaseService {
         return dateFormat.format(date);
     }
 
+    
+    
 }

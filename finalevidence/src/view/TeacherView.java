@@ -5,50 +5,26 @@
  */
 package view;
 
-import domain.Purchase;
-import java.util.ArrayList;
-import java.util.Date;
+import domain.Student;
+import domain.Teacher;
 import java.util.List;
+import javax.swing.DefaultButtonModel;
 import javax.swing.table.DefaultTableModel;
-import service.PurchaseService;
+import service.TeacherService;
 
 /**
  *
- * @author user
+ * @author MAHBUB
  */
-public class PurchaseView extends javax.swing.JFrame {
+public class TeacherView extends javax.swing.JFrame {
 
     /**
-     * Creates new form PurchaseView
+     * Creates new form TeacherView
      */
-    public PurchaseView() {
+    public TeacherView() {
         initComponents();
-        getPurchaseTable();
-    }
+        getTeacherTableModel();
 
-    void clearForm() {
-        txtid.setText("");
-        txtName.setText("");
-        txtPrice.setText("");
-        txtDate.setText("");
-        lblDisplay.setText("");
-    }
-
-    void getPurchaseTable() {
-        DefaultTableModel model = (DefaultTableModel) tblDisplay.getModel();
-        model.setRowCount(0);
-
-        List<Purchase> list = PurchaseService.getPurchaseList();
-        Object[] row = new Object[4];
-
-        for (int i = 0; i < list.size(); i++) {
-            row[0] = list.get(i).getId();
-            row[1] = list.get(i).getName();
-            row[2] = list.get(i).getPrice();
-            row[3] = list.get(i).getDate();
-
-            model.addRow(row);
-        }
     }
 
     /**
@@ -63,19 +39,20 @@ public class PurchaseView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtid = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtPrice = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtDate = new javax.swing.JTextField();
-        lblDisplay = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtSubject = new javax.swing.JTextField();
+        txtStdID = new javax.swing.JTextField();
         btnInsert = new javax.swing.JButton();
+        lblDisplay = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDisplay = new javax.swing.JTable();
@@ -84,22 +61,16 @@ public class PurchaseView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setText("Purchase");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Student Tuition Data");
 
         jLabel2.setText("ID");
 
         jLabel3.setText("Name");
 
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Subject");
 
-        jLabel4.setText("Price");
-
-        jLabel5.setText("Date");
+        jLabel5.setText("Std_ID");
 
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +93,7 @@ public class PurchaseView extends javax.swing.JFrame {
             }
         });
 
-        btnClear.setText("Clear Form");
+        btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
@@ -136,77 +107,86 @@ public class PurchaseView extends javax.swing.JFrame {
             }
         });
 
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(57, 57, 57)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDate)
-                            .addComponent(txtPrice)
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtID)
                             .addComponent(txtName)
-                            .addComponent(txtid)))
+                            .addComponent(txtSubject)
+                            .addComponent(txtStdID, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnInsert)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUpdate)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDelete))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnClear)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSearch))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(lblDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 26, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(40, 40, 40)
+                        .addComponent(btnClear)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExit))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(btnInsert)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDelete))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsert)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearch)
                     .addComponent(btnClear)
-                    .addComponent(btnSearch))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(btnExit))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -216,7 +196,7 @@ public class PurchaseView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Price", "Date"
+                "ID", "Name", "Tuition Sub", "Std_ID"
             }
         ));
         jScrollPane1.setViewportView(tblDisplay);
@@ -225,15 +205,12 @@ public class PurchaseView extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -244,7 +221,7 @@ public class PurchaseView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -262,61 +239,97 @@ public class PurchaseView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+    void clearForm() {
+        txtID.setText("");
+        txtName.setText("");
+        txtSubject.setText("");
+        txtStdID.setText("");
+        lblDisplay.setText("");
+
+    }
+
+    void getTeacherTableModel() {
+        DefaultTableModel model = (DefaultTableModel) tblDisplay.getModel();
+        model.setRowCount(0);
+
+        List<Teacher> list = TeacherService.getTeacherList();
+        Object[] row = new Object[4];
+
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getId();
+            row[1] = list.get(i).getName();
+            row[2] = list.get(i).getSubject();
+            row[3] = list.get(i).getStd().getId();
+            model.addRow(row);
+
+        }
+
+    }
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        Purchase p = new Purchase(txtName.getText(), Double.parseDouble(txtPrice.getText()), new Date());
-        PurchaseService.insert(p);
-        clearForm();
-        lblDisplay.setText("Data Inserted!");
-        getPurchaseTable();
-    }//GEN-LAST:event_btnInsertActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
         clearForm();
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        // TODO add your handling code here:
+        Teacher t = new Teacher();
+        t.setId(txtID.getText());
+        t.setName(txtName.getText());
+        t.setSubject(txtSubject.getText());
+        Student s = new Student();
+        s.setId(txtStdID.getText());
+        t.setStd(s);
+        TeacherService.Insert(t);
+        clearForm();
+        lblDisplay.setText("Data Sucsessfully insert");
+        getTeacherTableModel();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        Purchase p = new Purchase();
-        p.setName(txtName.getText());
-        p.setPrice(Double.parseDouble(txtPrice.getText()));
-        p.setId(Integer.parseInt(txtid.getText()));
-        PurchaseService.update(p);
+        Teacher t = new Teacher();
+        t.setId(txtID.getText());
+        t.setName(txtName.getText());
+        t.setSubject(txtSubject.getText());
+        Student s = new Student();
+        s.setId(txtStdID.getText());
+        t.setStd(s);
+        TeacherService.Update(t);
         clearForm();
-        lblDisplay.setText("Data Updated!");
-        getPurchaseTable();
+        lblDisplay.setText("Data update Sucsess ");
+        getTeacherTableModel();
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        Purchase p = new Purchase();
-        p.setId(Integer.parseInt(txtid.getText()));
-        PurchaseService.delete(p);
-        clearForm();
-        lblDisplay.setText("Data Deleted!");
-        getPurchaseTable();
-    }//GEN-LAST:event_btnDeleteActionPerformed
+        Teacher t = new Teacher();
+        t.setId(txtID.getText());
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+        TeacherService.Delete(t);
+        clearForm();
+        lblDisplay.setText("Data Delete Sucsess ");
+        getTeacherTableModel();
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        
+
         try {
-            Purchase p = PurchaseService.getPurchaseByProductId(txtid.getText().trim());
-            txtName.setText(p.getName());
-            txtPrice.setText(String.valueOf(p.getPrice()));
-            
-            txtDate.setText(PurchaseService.getStringFromDate(p.getDate()));
-            
-            
+            Teacher t = TeacherService.getTeacherID(txtID.getText());
+            txtName.setText(t.getName());
+            txtSubject.setText(t.getSubject());
+            txtStdID.setText(t.getStd().getId());
+
         } catch (Exception e) {
         }
-        
-        
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
@@ -336,20 +349,20 @@ public class PurchaseView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PurchaseView().setVisible(true);
+                new TeacherView().setVisible(true);
             }
         });
     }
@@ -357,6 +370,7 @@ public class PurchaseView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
@@ -370,9 +384,9 @@ public class PurchaseView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDisplay;
     private javax.swing.JTable tblDisplay;
-    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtid;
+    private javax.swing.JTextField txtStdID;
+    private javax.swing.JTextField txtSubject;
     // End of variables declaration//GEN-END:variables
 }

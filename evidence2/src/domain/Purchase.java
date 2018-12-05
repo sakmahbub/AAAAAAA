@@ -22,6 +22,14 @@ public class Purchase {
     public Purchase() {
     }
 
+    public Purchase(int id, String name, double price, Date date) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.date = date;
+    }
+    
+
     public Purchase(String name, double price, Date date) {
         this.name = name;
         this.price = price;
