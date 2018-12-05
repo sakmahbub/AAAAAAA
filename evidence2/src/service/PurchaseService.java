@@ -11,7 +11,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,9 +25,10 @@ import java.util.logging.Logger;
  * @author User
  */
 public class PurchaseService {
+
     static Connection conn = MySqlDbConnection.getConnection();
-    
-    public static void createTable(){
+
+    public static void createTable() {
         String sql = "create table purchase(id int auto_increment primary key, name varchar(30), price double, date Date)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -33,8 +38,8 @@ public class PurchaseService {
             Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void insert(Purchase p){
+
+    public static void insert(Purchase p) {
         String sql = "insert into purchase(name,price,date) values(?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -47,8 +52,8 @@ public class PurchaseService {
             Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void update(Purchase p){
+
+    public static void update(Purchase p) {
         String sql = "update purchase set name = ?, price = ? where id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -61,8 +66,8 @@ public class PurchaseService {
             Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void delete(Purchase p){
+
+    public static void delete(Purchase p) {
         String sql = "delete from purchase where id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -73,15 +78,15 @@ public class PurchaseService {
             Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static List<Purchase> getPurchaseTable(){
+
+    public static List<Purchase> getPurchaseTable() {
         List<Purchase> list = new ArrayList<>();
         String sql = "select * from purchase";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Purchase p = new Purchase();
                 p.setId(rs.getInt(1));
                 p.setName(rs.getString(2));
@@ -92,7 +97,36 @@ public class PurchaseService {
         } catch (SQLException ex) {
             Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
+
+    public static Purchase getPurchaseByProductCode(String purchaseId) {
+        Purchase p = new Purchase();
+        String sql = "select * from purchase where id=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, purchaseId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                p.setId(rs.getInt(1));
+                p.setName(rs.getString(2));
+                p.setPrice(rs.getDouble(3));
+                p.setDate(rs.getDate(4));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
+    }
+    
+    public static String getStringFromDate(Date date) {
+        date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
+    }
+
 }
