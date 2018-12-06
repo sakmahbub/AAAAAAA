@@ -17,7 +17,8 @@ public class TeacherService {
     static Connection conn = MySqlConnection.getConnection();
 
     public static void createTable() {
-        String sql = "create table teacher(id varchar(11) primary key, name varchar(30), subject varchar(30), std_id varchar(11), foreign key(std_id) references student(id))";
+        String sql = "create table teacher(id varchar(11) primary key, name varchar(30), "
+         + "subject varchar(30), std_id varchar(11), foreign key(std_id) references student(id))";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);

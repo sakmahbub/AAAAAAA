@@ -1,0 +1,61 @@
+
+
+
+
+public static void insertMain(Purchase purchase) {
+        if (purchase != null) {
+            insert(purchase);
+            Purchase p = getPurchaseByProductCode(purchase.getProductCode());
+
+            try {
+                Summary summary = SummaryService.getSummaryByProductCode(purchase.getProductCode());
+                if (purchase.getProductCode().equalsIgnoreCase(summary.getProductCode())) {
+                    int totalQty = summary.getTotalQty() + purchase.getQty();
+                    int avilQty = summary.getAvailableQty() + purchase.getQty();
+                    summary.setTotalQty(totalQty);
+                    summary.setAvailableQty(avilQty);
+                    summary.setLastUpdate(new Date());
+                }
+                SummaryService.update(summary);
+
+            } catch (NullPointerException e) {
+
+                Summary summary3 = new Summary(purchase.getProductName(), purchase.getProductCode(), purchase.getQty(), 0, purchase.getQty(), new Date(), p);
+                SummaryService.insert(summary3);
+
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+
+public static void insertForSales(Sales sales) {
+        if (sales.getProductCode() != null) {
+            Summary summary = SummaryService.getSummaryByProductCode(sales.getProductCode());
+            if (summary.getAvailableQty() >= sales.getQty()) {
+                insert(sales);
+                int soldQrt = summary.getSoldQty() + sales.getQty();
+                int avilQty = summary.getAvailableQty() - sales.getQty();
+
+                summary.setSoldQty(soldQrt);
+                summary.setAvailableQty(avilQty);
+                summary.setLastUpdate(new Date());
+
+                SummaryService.update(summary);
+            } else {
+                System.out.println("You do not have sufficient Product");
+            }
+        }
+    }
+	
+	
+	
+	
+	
+	
